@@ -9,13 +9,15 @@ public class Spawner : MonoBehaviour
     public float spawnRate;
     public float spawnDistance;
     private float timeSinceLastSpawn;
+    public int maxEnemiesCount = 10;
+    private int currentEnemiesCount = 0;
     
     // Update is called once per frame
     void Update()
     {
         timeSinceLastSpawn += Time.deltaTime;
 
-        if (timeSinceLastSpawn >= spawnRate)
+        if (timeSinceLastSpawn >= spawnRate && maxEnemiesCount > currentEnemiesCount)
         {
             SpawnEnemy();
             timeSinceLastSpawn = 0.0f;
@@ -23,6 +25,7 @@ public class Spawner : MonoBehaviour
     }
 
     void SpawnEnemy() {
+        currentEnemiesCount++;
         Vector2 spawnPosition = Random.insideUnitSphere.normalized * spawnDistance;
         spawnPosition += (Vector2)transform.position;
 

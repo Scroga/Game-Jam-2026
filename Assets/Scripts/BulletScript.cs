@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 namespace WeaponSystem {
     [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
     public class BulletScript : MonoBehaviour {
-        private int damage;
+        private float damage;
         private float originalRotation;
         private LayerMask layerMask;
         private Vector2 originalVelocity;

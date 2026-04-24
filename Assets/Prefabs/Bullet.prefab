@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1544a28f234184542a5c5513f06dec15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  popUpDamage: {fileID: 285421860163989284, guid: da325dc56d5452043ac036b3824d7028, type: 3}
 --- !u!50 &1982179658493008760
 Rigidbody2D:
   serializedVersion: 4

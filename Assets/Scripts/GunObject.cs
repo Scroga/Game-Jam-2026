@@ -41,7 +41,7 @@ namespace WeaponSystem {
         public class BulletSettings
         {
             public float bulletSpeed = 20f;
-            public int bulletDamage = 10;
+            public float bulletDamage = 10;
             public float bulletLife = 2.5f;
             public bool explosiveBullets;
             public bool bulletPenetration;

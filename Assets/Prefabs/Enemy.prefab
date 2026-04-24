@@ -180,12 +180,12 @@ GameObject:
   - component: {fileID: 3607188906040497248}
   - component: {fileID: 1406602440145749859}
   - component: {fileID: 472850009923917817}
-  - component: {fileID: 8333470340821372284}
   - component: {fileID: 6569157094008294652}
   - component: {fileID: 6064332088186572604}
+  - component: {fileID: 1183988017575672666}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,20 +402,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8333470340821372284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2627032819028359411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72a192f9825bd194495ae1a18105f8a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 2
 --- !u!50 &6569157094008294652
 Rigidbody2D:
   serializedVersion: 4
@@ -458,6 +444,21 @@ MonoBehaviour:
   health: 100
   healthSlider: {fileID: 1889536890525719885}
   audioSource: {fileID: 0}
+--- !u!114 &1183988017575672666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2627032819028359411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f8c18aec297154795fa40fdbd3bfe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  speed: 2
+  damage: 10
 --- !u!1 &4306235616233141377
 GameObject:
   m_ObjectHideFlags: 0

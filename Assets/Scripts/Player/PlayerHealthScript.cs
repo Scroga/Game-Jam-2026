@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
-public class HealthScript : MonoBehaviour
+public class PlayerHealthScript : MonoBehaviour
 {
     [SerializeField] private float health;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private PopUpDamage popUpDamagePrefab;
+    [SerializeField] private float damageFrequency = 1.0f;
+    private float timeSinceLastDamage = 0;
     private float maxHealth;
 
     public void Start()
@@ -17,17 +17,23 @@ public class HealthScript : MonoBehaviour
         maxHealth = health;
     }
 
-    private void CreateNumbers() {
-    
+    public void Update()
+    {
+        timeSinceLastDamage += Time.deltaTime;
+    }
+
+    public void TryToGetDamage(float amount)
+    {
+        if (timeSinceLastDamage >= damageFrequency) {
+            RemoveHealth(amount);
+            timeSinceLastDamage = 0.0f;
+        }
     }
 
     public void AddHealth(float amount)
     {
-        float oldHealth = health;
-
-        health = Mathf.Clamp(health + amount, 0, maxHealth);
-
-        float currentHeal = health - oldHealth;
+        health += amount;
+        health = health > maxHealth ? maxHealth : health;
 
         healthSlider.value = health / maxHealth;
     }
@@ -35,14 +41,10 @@ public class HealthScript : MonoBehaviour
     //Remove health
     public void RemoveHealth(float damage)
     {
-        float oldHealth = health;
-
-        health = Mathf.Clamp(health - damage, 0, maxHealth);
-
-        float currentDamage = oldHealth - health;
+        health -= damage;
+        health = health < 0 ? 0 : health;
 
         healthSlider.value = health / maxHealth;
-
         if (health <= 0)
         {
             OnDeath();
@@ -59,11 +61,13 @@ public class HealthScript : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<Collider2D>().enabled = false;
 
-            Destroy(gameObject, audioSource.clip.length);
+            //Destroy(gameObject, audioSource.clip.length);
+            gameObject.SetActive(false);
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

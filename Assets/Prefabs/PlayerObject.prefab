@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1953519353718705616}
   - component: {fileID: 5191470022515303108}
   - component: {fileID: 2977210562994023462}
-  - component: {fileID: 4615402174459117550}
+  - component: {fileID: 1533319234530688315}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Player
@@ -157,7 +157,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4615402174459117550
+--- !u!114 &1533319234530688315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,12 +166,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3396188502924133989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0baad28b2fbf1884d90a871c2158ad9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f13a4d462fac964195a5471a762a23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
   healthSlider: {fileID: 2743199148088712482}
   audioSource: {fileID: 0}
+  damageFrequency: 0.4
 --- !u!1 &4358026764304921300
 GameObject:
   m_ObjectHideFlags: 0
