@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60dc6f8b37ed85342832871c57584d8f, type: 3}
   m_Name: Automatic Gun
   m_EditorClassIdentifier: 
-  gunName: Automatic Gun
+  gunName: 'Lasers '
   useDelayBetweenShots: 1
   useAmmoLimit: 1
   useAudio: 0

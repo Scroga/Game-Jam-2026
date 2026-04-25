@@ -8,16 +8,18 @@ public class Spawner : MonoBehaviour
     public GameObject enemyPrefab;
     public float spawnRate;
     public float spawnDistance;
-    private float timeSinceLastSpawn;
     public int maxEnemiesCount = 10;
-    private int currentEnemiesCount = 0;
-    
+
+    private float timeSinceLastSpawn;
+    private List<GameObject> enemies = new List<GameObject>();
     // Update is called once per frame
     void Update()
     {
+        enemies.RemoveAll(enemy => enemy == null);
+
         timeSinceLastSpawn += Time.deltaTime;
 
-        if (timeSinceLastSpawn >= spawnRate && maxEnemiesCount > currentEnemiesCount)
+        if (timeSinceLastSpawn >= spawnRate && maxEnemiesCount > enemies.Count)
         {
             SpawnEnemy();
             timeSinceLastSpawn = 0.0f;
@@ -25,10 +27,10 @@ public class Spawner : MonoBehaviour
     }
 
     void SpawnEnemy() {
-        currentEnemiesCount++;
         Vector2 spawnPosition = Random.insideUnitSphere.normalized * spawnDistance;
         spawnPosition += (Vector2)transform.position;
 
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        enemies.Add(enemy);
     }
 }

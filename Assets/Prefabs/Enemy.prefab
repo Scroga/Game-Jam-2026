@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 6569157094008294652}
   - component: {fileID: 6064332088186572604}
   - component: {fileID: 1183988017575672666}
+  - component: {fileID: 7971405423002911983}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -415,9 +416,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 8.54
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -441,9 +442,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0baad28b2fbf1884d90a871c2158ad9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 70
   healthSlider: {fileID: 1889536890525719885}
   audioSource: {fileID: 0}
+  popUpDamagePrefab: {fileID: 285421860163989284, guid: da325dc56d5452043ac036b3824d7028, type: 3}
+  damageColor: {r: 0.7264151, g: 0.28296423, b: 0, a: 1}
+  healColor: {r: 0.7735849, g: 0.464504, b: 0, a: 1}
+  isDamageable: 1
 --- !u!114 &1183988017575672666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +464,23 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 2
   damage: 10
+--- !u!114 &7971405423002911983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2627032819028359411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be864c095563c64380f7576de03c603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefabs:
+  - {fileID: 7504307348160680004, guid: 4367e2ee625d67a4495368d1dd81ce75, type: 3}
+  - {fileID: 8659463440426262611, guid: ffaf80578fa6daf49b5a186f7b1baf05, type: 3}
+  - {fileID: 8659463440426262611, guid: ffaf80578fa6daf49b5a186f7b1baf05, type: 3}
+  dropChance: 0.5
 --- !u!1 &4306235616233141377
 GameObject:
   m_ObjectHideFlags: 0

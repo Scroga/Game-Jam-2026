@@ -16,6 +16,7 @@ namespace WeaponSystem {
         private BulletCurrentPenetrationLevel currentPenetrationLevel;
         private bool isReleased;
         private Coroutine lifeCoroutine;
+        private PlayerMovementScript playerMovementScript;
 
         private enum BulletCurrentPenetrationLevel {
             VeryLow,
@@ -27,6 +28,8 @@ namespace WeaponSystem {
         
         private void Awake() {
             //Set values for rigidbody
+            playerMovementScript = FindFirstObjectByType<PlayerMovementScript>();
+
             rb = GetComponent<Rigidbody2D>();
             rb.gravityScale = 0;
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
@@ -146,7 +149,6 @@ namespace WeaponSystem {
 
             //Create explosion particle effect
             if (gunScript.gunObject.bulletSettings.explosionParticlePrefab != null) {
-                PlayerMovementScript playerMovementScript = FindFirstObjectByType<PlayerMovementScript>();
 
                 if (playerMovementScript != null && playerMovementScript.cameraFollowScript != null && playerMovementScript.cameraFollowScript.useCameraShake == true && playerMovementScript.cameraFollowScript.explosionCameraShake == true) {
                     playerMovementScript.cameraFollowScript.StartCameraShake();
@@ -175,8 +177,6 @@ namespace WeaponSystem {
 
             //Create explosion particle effect
             if (gunScript.gunObject.bulletSettings.explosionParticlePrefab != null) {
-                PlayerMovementScript playerMovementScript = FindFirstObjectByType<PlayerMovementScript>();
-
                 if (playerMovementScript != null && playerMovementScript.cameraFollowScript != null && playerMovementScript.cameraFollowScript.useCameraShake == true && playerMovementScript.cameraFollowScript.explosionCameraShake == true) {
                     playerMovementScript.cameraFollowScript.StartCameraShake();
                 }

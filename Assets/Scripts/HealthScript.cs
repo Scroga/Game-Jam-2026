@@ -1,24 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class HealthScript : MonoBehaviour
 {
-    [SerializeField] private float health;
-    [SerializeField] private Slider healthSlider;
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private PopUpDamage popUpDamagePrefab;
-    private float maxHealth;
+    [SerializeField] protected float health;
+    [SerializeField] protected Slider healthSlider;
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected PopUpDamage popUpDamagePrefab;
+    [SerializeField] protected Color damageColor;
+    [SerializeField] protected Color healColor;
+    [SerializeField] public bool isDamageable = true;
+    protected float maxHealth;
+    protected float powerOfDamageNumbersVelocity = 3.0f;
 
-    public void Start()
+    protected virtual void Start()
     {
         maxHealth = health;
+
+        if (healthSlider != null)
+            healthSlider.value = health / maxHealth;
     }
 
-    private void CreateNumbers() {
-    
+    protected virtual void Update()
+    {
+    }
+    private void SpawnPopUp(float amount, Color color, float scale)
+    {
+        if (popUpDamagePrefab == null) return;
+
+        PopUpDamage popUp = Instantiate(
+            popUpDamagePrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+        Vector2 damagePopupVelocity = Random.insideUnitCircle.normalized * powerOfDamageNumbersVelocity;
+
+        popUp.Setup(amount, color, damagePopupVelocity, scale);
     }
 
     public void AddHealth(float amount)
@@ -28,6 +46,9 @@ public class HealthScript : MonoBehaviour
         health = Mathf.Clamp(health + amount, 0, maxHealth);
 
         float currentHeal = health - oldHealth;
+        float scaleMultiplier = currentHeal / maxHealth + 1.0f;
+
+        SpawnPopUp(currentHeal, healColor, scaleMultiplier);
 
         healthSlider.value = health / maxHealth;
     }
@@ -35,11 +56,16 @@ public class HealthScript : MonoBehaviour
     //Remove health
     public void RemoveHealth(float damage)
     {
+        if (!isDamageable) return;
+
         float oldHealth = health;
 
         health = Mathf.Clamp(health - damage, 0, maxHealth);
 
         float currentDamage = oldHealth - health;
+        float scaleMultiplier = currentDamage / maxHealth + 1.0f;
+
+        SpawnPopUp(currentDamage, damageColor, scaleMultiplier);
 
         healthSlider.value = health / maxHealth;
 
@@ -49,9 +75,19 @@ public class HealthScript : MonoBehaviour
         }
     }
 
+    public bool IsFull() {
+        return health >= maxHealth;
+    }
+
     //Destroy object
-    private void OnDeath()
+    protected virtual void OnDeath()
     {
+
+        if (gameObject.TryGetComponent<DropItem>(out var dropScript))
+        {
+            dropScript.Drop();
+        }
+
         if (audioSource != null)
         {
             audioSource.Play();

@@ -70,7 +70,7 @@ namespace WeaponSystem {
                             ammoText.text = "infAmmo";
                         }
                         else {
-                            ammoText.text = gunObject.maxClipSize + " / " + gunObject.maxClipSize;
+                            ammoText.text = gunObject.maxClipSize + " \\ " + gunObject.maxClipSize;
                         }
                     }
 
@@ -279,7 +279,7 @@ namespace WeaponSystem {
             }
 
             if (enableUI == true && ammoText != null && gunObject.useAmmoLimit == true) {
-                ammoText.text = currentAmmo + " / " + gunObject.maxClipSize; //Update ammo text
+                ammoText.text = gunObject.maxClipSize + " \\ " + currentAmmo; //Update ammo text
             }
 
             player.TryGetComponent(out PlayerMovementScript playerMovementScript);
@@ -312,7 +312,7 @@ namespace WeaponSystem {
                 isReloading = false;
 
                 if (enableUI == true && ammoText != null) {
-                    ammoText.text = currentAmmo + " / " + gunObject.maxClipSize;
+                    ammoText.text = gunObject.maxClipSize + " \\ " + currentAmmo;
                 }
             }
         }

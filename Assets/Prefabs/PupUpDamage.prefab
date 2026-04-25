@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 28}
-  m_SizeDelta: {x: 100, y: 44.01}
+  m_AnchoredPosition: {x: 0, y: 27.59}
+  m_SizeDelta: {x: 100, y: 44.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9215753346677285751
 CanvasRenderer:
@@ -180,9 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a67c4e2f58a874e924285547e5c336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoText: {fileID: 1973403158511369683}
+  amountText: {fileID: 1973403158511369683}
   initialVelocity: {x: 1, y: 1}
-  lifeTime: 3
+  lifeTime: 2
 --- !u!50 &361261473041435415
 Rigidbody2D:
   serializedVersion: 4
