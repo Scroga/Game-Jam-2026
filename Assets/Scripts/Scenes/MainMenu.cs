@@ -19,8 +19,8 @@ public class MainMenu : MonoBehaviour
     }
     public void Play()
     {
-        LevelManager.Instance.LoadScene("Game", "CircleWipe");
-        MusicManager.Instance.StopMusic();
+        LevelManager.Instance.LoadScene("Level0", "CircleWipe");
+        MusicManager.Instance.PlayMusic("Game", 1.5f);
     }
     public void Quit()
     {

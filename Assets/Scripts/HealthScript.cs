@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour
 {
-    [SerializeField] protected float health;
+    [SerializeField] private UnityEvent<GameObject> onDeath;
+    [SerializeField] public float health;
     [SerializeField] protected Slider healthSlider;
     [SerializeField] protected AudioSource audioSource;
     [SerializeField] protected PopUpDamage popUpDamagePrefab;
@@ -50,7 +52,8 @@ public class HealthScript : MonoBehaviour
 
         SpawnPopUp(currentHeal, healColor, scaleMultiplier);
 
-        healthSlider.value = health / maxHealth;
+        if (healthSlider != null)
+            healthSlider.value = health / maxHealth;
     }
 
     //Remove health
@@ -67,7 +70,8 @@ public class HealthScript : MonoBehaviour
 
         SpawnPopUp(currentDamage, damageColor, scaleMultiplier);
 
-        healthSlider.value = health / maxHealth;
+        if (healthSlider != null)
+            healthSlider.value = health / maxHealth;
 
         if (health <= 0)
         {
@@ -88,6 +92,7 @@ public class HealthScript : MonoBehaviour
             dropScript.Drop();
         }
 
+        onDeath.Invoke(gameObject);
         if (audioSource != null)
         {
             audioSource.Play();

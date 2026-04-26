@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 
 namespace WeaponSystem {
@@ -80,16 +79,21 @@ namespace WeaponSystem {
         }
 
         //Used to call the camera shake coroutine
-        public void StartCameraShake() {
-            StartCoroutine(CameraShake());
+        public void StartCameraShake(float intensity) {
+            StartCoroutine(CameraShake(intensity));
+        }
+
+        public void StartCameraShake()
+        {
+            StartCoroutine(CameraShake(cameraShakeIntensity));
         }
 
         //Shakes the camera
-        private IEnumerator CameraShake() {
+        private IEnumerator CameraShake(float intensity) {
             for (int i = 0; i < 2; i++) {
                 float timeElapsed = 0;
                 Vector3 startPos = playerCamera.transform.localPosition;
-                Vector3 endPos = Vector3.zero + new Vector3(Random.Range(-0.1f * cameraShakeIntensity, 0.1f * cameraShakeIntensity), Random.Range(-0.1f * cameraShakeIntensity, 0.1f * cameraShakeIntensity), 0);
+                Vector3 endPos = Vector3.zero + new Vector3(Random.Range(-0.1f * intensity, 0.1f * intensity), Random.Range(-0.1f * intensity, 0.1f * intensity), 0);
 
                 if (i == 1) {
                     endPos = Vector3.zero;
@@ -106,26 +110,4 @@ namespace WeaponSystem {
             }
         }
     }
-
-    //Custom editor
-#if (UNITY_EDITOR)
-    [CustomEditor(typeof(CameraFollowScript))]
-    public class CameraFollowEditor : Editor {
-        [InitializeOnEnterPlayMode]
-        public override void OnInspectorGUI() {
-            base.OnInspectorGUI();
-
-            CameraFollowScript cameraFollowScript = (CameraFollowScript)target;
-
-            //Only display field if required
-            if (cameraFollowScript.useCameraShake == true) {
-                EditorGUILayout.Space(10);
-                EditorGUILayout.LabelField("Additional Settings", EditorStyles.boldLabel);
-
-                cameraFollowScript.explosionCameraShake = EditorGUILayout.Toggle("Explosion Camera Shake", cameraFollowScript.explosionCameraShake);
-                cameraFollowScript.cameraShakeIntensity = EditorGUILayout.FloatField("Camera Shake Intensity", cameraFollowScript.cameraShakeIntensity);
-            }
-        }
-    }
-#endif
 }

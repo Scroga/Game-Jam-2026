@@ -312,9 +312,36 @@ MonoBehaviour:
   - groupID: ButtonClick_Sci-Fi
     clips:
     - {fileID: 8300000, guid: 3eab95774fe317a489c29e1075d3d6a2, type: 3}
-  - groupID: Money
+  - groupID: Laser
     clips:
-    - {fileID: 8300000, guid: fdbfa8ccb73f2ab46a972401a52d059a, type: 3}
+    - {fileID: 8300000, guid: 27d6f20df5b5e3b4394b32a4890d1378, type: 3}
+  - groupID: Elon
+    clips:
+    - {fileID: 8300000, guid: 097be66bfd9c54d48818ef497087adc3, type: 3}
+  - groupID: Trump
+    clips:
+    - {fileID: 8300000, guid: 094a5114272209c4587ba334200e9149, type: 3}
+  - groupID: WakeUp
+    clips:
+    - {fileID: 8300000, guid: ed7eeea05f3f66146a849e49f9b6e03f, type: 3}
+  - groupID: DarkHeHe
+    clips:
+    - {fileID: 8300000, guid: 7a7c38e1996dd02489c37af11e7d3960, type: 3}
+  - groupID: Jackson
+    clips:
+    - {fileID: 8300000, guid: c5791d24e7899bc43881cda2732619f3, type: 3}
+  - groupID: Heal
+    clips:
+    - {fileID: 8300000, guid: 66e7a5f7e7c0d9744afa8a52986c3f88, type: 3}
+  - groupID: Energy
+    clips:
+    - {fileID: 8300000, guid: ee5277f8ccba94549bbf424480762608, type: 3}
+  - groupID: Explosion
+    clips:
+    - {fileID: 8300000, guid: fbd5d55878319c14b9801e0ff734715b, type: 3}
+  - groupID: YouDied
+    clips:
+    - {fileID: 8300000, guid: 53aa44dfde5eee5408171da501b01b46, type: 3}
 --- !u!114 &6853231739459731816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,9 +371,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tracks:
   - trackName: Menu
-    clip: {fileID: 8300000, guid: 060a42b5209381848bee0beb7d90346a, type: 3}
+    clip: {fileID: 8300000, guid: 5d7b27f59d04c4f4a8bf53532beba796, type: 3}
   - trackName: Game
     clip: {fileID: 8300000, guid: 3cf3530050ab2054880efeb78bb30fad, type: 3}
+  - trackName: Boss
+    clip: {fileID: 8300000, guid: 78b590dd697d7a54fa870a48017057df, type: 3}
 --- !u!114 &9008189362875512355
 MonoBehaviour:
   m_ObjectHideFlags: 0

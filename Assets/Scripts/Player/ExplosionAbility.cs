@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using WeaponSystem;
 
 public class ExplosionAbility : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class ExplosionAbility : MonoBehaviour
     [SerializeField] private Color getColor = Color.green;
     [SerializeField] private float powerOfDamageNumbersVelocity = 1.0f;
 
+    private CameraFollowScript cameraFollowScript;
     private CircleCollider2D explosionCollider;
     private float normalRadius;
     private float explosionRadius;
@@ -51,11 +53,14 @@ public class ExplosionAbility : MonoBehaviour
             return;
         }
 
+        cameraFollowScript = FindFirstObjectByType<CameraFollowScript>();
+
         normalRadius = explosionCollider.radius;
         explosionRadius = normalRadius * explosionColliderSizeMultiplier;
     }
 
-    public bool IsFull() {
+    public bool IsFull()
+    {
         return maxAmount <= amount;
     }
 
@@ -116,6 +121,9 @@ public class ExplosionAbility : MonoBehaviour
         if (explosionPrefab == null) return;
         if (amount - amountSpentOnExplosion < 0f) return;
 
+        cameraFollowScript.StartCameraShake(3.0f);
+        SoundManager.Instance.PlaySound2D("Explosion");
+
         ParticleSystem explosion = Instantiate(
             explosionPrefab,
             transform.position,
@@ -171,7 +179,7 @@ public class ExplosionAbility : MonoBehaviour
     {
         sinceLastExplosion += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             SpawnExplosion();
         }

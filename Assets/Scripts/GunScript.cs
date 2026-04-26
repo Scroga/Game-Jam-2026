@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
 namespace WeaponSystem {
@@ -70,7 +69,7 @@ namespace WeaponSystem {
                             ammoText.text = "infAmmo";
                         }
                         else {
-                            ammoText.text = gunObject.maxClipSize + " \\ " + gunObject.maxClipSize;
+                            ammoText.text = gunObject.maxClipSize + " / " + gunObject.maxClipSize;
                         }
                     }
 
@@ -273,13 +272,13 @@ namespace WeaponSystem {
         //Handles functionality for when a bullet is shot
         private void FireBullet() {
             bulletSpawner.bulletPool.Get(); //Spawn new bullet using object pool
-
+            SoundManager.Instance.PlaySound2D("Laser");
             if (gunObject.useAmmoLimit) {
                 currentAmmo--;
             }
 
             if (enableUI == true && ammoText != null && gunObject.useAmmoLimit == true) {
-                ammoText.text = gunObject.maxClipSize + " \\ " + currentAmmo; //Update ammo text
+                ammoText.text = currentAmmo + " / " + gunObject.maxClipSize; //Update ammo text
             }
 
             player.TryGetComponent(out PlayerMovementScript playerMovementScript);
@@ -312,7 +311,7 @@ namespace WeaponSystem {
                 isReloading = false;
 
                 if (enableUI == true && ammoText != null) {
-                    ammoText.text = gunObject.maxClipSize + " \\ " + currentAmmo;
+                    ammoText.text = currentAmmo + " / " + gunObject.maxClipSize;
                 }
             }
         }
@@ -322,40 +321,4 @@ namespace WeaponSystem {
             StartCoroutine(ReloadGun());
         }
     }
-
-    //Custom Editor
-#if (UNITY_EDITOR)
-    [CustomEditor(typeof(GunScript))]
-    public class GunScriptEditor : Editor
-    {
-        [InitializeOnEnterPlayMode]
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-
-            GunScript gunScript = (GunScript)target;
-
-            if (gunScript.enableUI == true)
-            {
-                gunScript.ammoText = EditorGUILayout.ObjectField("Ammo Text", gunScript.ammoText, typeof(TMP_Text), true) as TMP_Text;
-            }
-
-            if (gunScript.enableUI == true)
-            {
-                gunScript.gunName = EditorGUILayout.ObjectField("Gun Name", gunScript.gunName, typeof(TMP_Text), true) as TMP_Text;
-            }
-
-            if (gunScript.gunObject != null)
-            {
-                if (gunScript.gunObject.useAudio == true)
-                {
-                    EditorGUILayout.Space(10);
-                    EditorGUILayout.LabelField("Audio Source", EditorStyles.boldLabel);
-
-                    gunScript.audioSource = EditorGUILayout.ObjectField("Audio Source", gunScript.audioSource, typeof(AudioSource), true) as AudioSource;
-                }
-            }
-        }
-    }
-#endif
 }

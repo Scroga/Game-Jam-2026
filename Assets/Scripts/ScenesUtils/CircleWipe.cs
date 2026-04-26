@@ -10,6 +10,7 @@ public class CircleWipe : SceneTransition
 
     public override IEnumerator AnimateTransitionIn()
     {
+        SoundManager.Instance.PlaySound2D("WakeUp");
         circle.rectTransform.anchoredPosition = new Vector2(-1000f, 0f);
         var tweener = circle.rectTransform.DOAnchorPosX(0f, 1f);
         yield return tweener.WaitForCompletion();

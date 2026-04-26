@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 namespace WeaponSystem {
@@ -37,32 +36,4 @@ namespace WeaponSystem {
             DestroyImmediate(audioSource);
         }
     }
-
-    //Custom editor
-#if (UNITY_EDITOR)
-    [CustomEditor(typeof(ObjectPenetration))]
-    public class ObjectPenetrationEditor : Editor {
-        [InitializeOnEnterPlayMode]
-        public override void OnInspectorGUI() {
-            base.OnInspectorGUI();
-
-            ObjectPenetration objectPenetrationScript = (ObjectPenetration)target;
-
-            //Only display field if required
-            if (objectPenetrationScript.useAudio == true) {
-                if (objectPenetrationScript.audioSource == null) {
-                    objectPenetrationScript.AddAudioSource();
-                }
-
-                EditorGUILayout.Space(10);
-                EditorGUILayout.LabelField("Audio Source", EditorStyles.boldLabel);
-
-                objectPenetrationScript.audioSource = EditorGUILayout.ObjectField("Audio Source", objectPenetrationScript.audioSource, typeof(AudioSource), true) as AudioSource;
-            }
-            else if (objectPenetrationScript.audioSource != null) {
-                objectPenetrationScript.RemoveAudioSource();
-            }
-        }
-    }
-#endif
 }

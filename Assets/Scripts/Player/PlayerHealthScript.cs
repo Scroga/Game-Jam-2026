@@ -2,8 +2,18 @@ using UnityEngine;
 
 public class PlayerHealthScript : HealthScript
 {
+    [SerializeField] private float currentHeal;
     [SerializeField] private float damageFrequency = 1.0f;
     private float timeSinceLastDamage = 0;
+
+    protected override void Start()
+    {
+        maxHealth = health;
+        health = currentHeal;
+
+        if (healthSlider != null)
+            healthSlider.value = health / maxHealth;
+    }
 
     protected override void Update()
     {
@@ -20,6 +30,7 @@ public class PlayerHealthScript : HealthScript
     //Destroy object
     protected override void OnDeath()
     {
+        LevelManager.Instance.OnDeath();
         if (audioSource != null)
         {
             audioSource.Play();

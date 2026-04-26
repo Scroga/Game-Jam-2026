@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: 'Lasers '
   useDelayBetweenShots: 1
-  useAmmoLimit: 1
+  useAmmoLimit: 0
   useAudio: 0
   weaponType: 1
   burstCount: 3

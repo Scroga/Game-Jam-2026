@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEditor;
 
 namespace WeaponSystem
 {
@@ -184,58 +183,4 @@ namespace WeaponSystem
             gunScript.ManualReload();
         }
     }
-
-    //Custom editor
-#if (UNITY_EDITOR)
-    [CustomEditor(typeof(PlayerMovementScript))]
-    public class PlayerMovementEditor : Editor
-    {
-        [InitializeOnEnterPlayMode]
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-
-            PlayerMovementScript movementScript = (PlayerMovementScript)target;
-
-            //Only display field if required
-            if (movementScript.useCameraFollowScript == true)
-            {
-                EditorGUILayout.Space(10);
-                EditorGUILayout.LabelField("Camera Follow Script", EditorStyles.boldLabel);
-
-                movementScript.cameraFollowScript = EditorGUILayout.ObjectField("Camera Follow Script", movementScript.cameraFollowScript, typeof(CameraFollowScript), true) as CameraFollowScript;
-            }
-
-            //Only display field if required
-            if (movementScript.useSprinting == true)
-            {
-                EditorGUILayout.Space(10);
-                EditorGUILayout.LabelField("Sprint Settings", EditorStyles.boldLabel);
-
-                movementScript.sprintMultiplier = EditorGUILayout.FloatField("Sprint Speed Multiplier", movementScript.sprintMultiplier);
-            }
-
-            //Only display field if required
-            if (movementScript.useAiming == true)
-            {
-                EditorGUILayout.Space(10);
-                EditorGUILayout.LabelField("Aim Settings", EditorStyles.boldLabel);
-
-                movementScript.aimMultiplier = EditorGUILayout.FloatField("Aim Speed Multiplier", movementScript.aimMultiplier);
-            }
-
-            //Only display field if required
-            if (movementScript.overrideGunScriptGunObject == true)
-            {
-                EditorGUILayout.Space(10);
-                EditorGUILayout.LabelField("Gun Object", EditorStyles.boldLabel);
-
-                EditorGUILayout.LabelField("WARNING! This will override the selected gun on the GunScript.\nUntoggle 'Override Gun Script Gun Object' if you do not wish to do this.", GUILayout.Height(50));
-
-                GUIContent gunObjectContent = new GUIContent("Gun Object", "WARNING! This will override the selected gun on the GunScript.");
-                movementScript.gunObjectOverride = EditorGUILayout.ObjectField(gunObjectContent, movementScript.gunObjectOverride, typeof(GunObject), false) as GunObject;
-            }
-        }
-    }
-#endif
 }

@@ -6,9 +6,11 @@ using UnityEngine;
 public class CrossFade : SceneTransition
 {
     public CanvasGroup crossFade;
+    public string soundName;
 
     public override IEnumerator AnimateTransitionIn()
     {
+        SoundManager.Instance.PlaySound2D(soundName);
         var tweener = crossFade.DOFade(1f, 1f);
         yield return tweener.WaitForCompletion();
     }

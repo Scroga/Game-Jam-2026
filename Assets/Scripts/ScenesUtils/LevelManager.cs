@@ -11,9 +11,46 @@ public class LevelManager : SmartSingleton<LevelManager>
     public GameObject transitionsContainer;
     public SceneTransition[] transitions;
 
+    private List<string> levels = new(){ 
+        "Level0",
+        "Level1",
+        "Level2",
+        "Level3",
+    };
+    private int currentLevel = 0;
+
     private void Start()
     {
         transitions = transitionsContainer.GetComponentsInChildren<SceneTransition>();
+    }
+    private bool IsValidLevelIndex(int index)
+    {
+        return index >= 0 && index < levels.Count;
+    }
+
+    public void LoadNextLevel()
+    {
+        int nextLevel = currentLevel + 1;
+
+        if (!IsValidLevelIndex(nextLevel))
+        {
+            Debug.Log("No next level");
+            return;
+        }
+
+        currentLevel = nextLevel;
+        LoadScene(levels[currentLevel], "CrossFade");
+    }
+
+    public void OnDeath()
+    {
+        if (!IsValidLevelIndex(currentLevel))
+        { 
+            Debug.LogError($"Invalid currentLevel index: {currentLevel}");
+            return;
+        }
+        MusicManager.Instance.PlayMusic("Game", 0.5f);
+        LoadScene(levels[currentLevel], "YouDied");
     }
 
     public void LoadScene(string sceneName, string transitionName)
